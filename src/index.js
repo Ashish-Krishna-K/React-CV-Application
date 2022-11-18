@@ -6,10 +6,14 @@ import './styles/index.css'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <header>CV GENERATOR</header>
+    <header>
+      <h1>CV GENERATOR</h1>
+    </header>
     <main>
       <App />
     </main>
-    <footer>Project by Ashish-Krishna-K</footer>
+    <footer>
+      <h2>Project by Ashish-Krishna-K</h2>
+    </footer>
   </React.StrictMode>
 );

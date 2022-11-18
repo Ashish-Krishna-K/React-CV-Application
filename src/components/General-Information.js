@@ -1,5 +1,15 @@
 import React from "react";
 
 export class General extends React.Component {
-    // name, email, phone number,
+    render() {
+
+        const { name, email, phone } = this.props.genInfo;
+        return (
+            <div id="general">
+                <div>{name}</div>
+                <div>{email}</div>
+                <div>{phone}</div>
+            </div>
+        )
+    }
 }
