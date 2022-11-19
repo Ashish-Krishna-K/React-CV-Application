@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/React-CV-Application/static/css/main.d99cc004.css",
+    "main.js": "/React-CV-Application/static/js/main.1f7ef948.js",
+    "index.html": "/React-CV-Application/index.html",
+    "static/media/delete-icon.svg": "/React-CV-Application/static/media/delete-icon.34c69359e0be0aac4d34.svg",
+    "main.d99cc004.css.map": "/React-CV-Application/static/css/main.d99cc004.css.map",
+    "main.1f7ef948.js.map": "/React-CV-Application/static/js/main.1f7ef948.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d99cc004.css",
+    "static/js/main.1f7ef948.js"
+  ]
+}
