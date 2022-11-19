@@ -1,23 +1,39 @@
 import React from "react";
+import '../styles/Experience.css'
 
 export class Experience extends React.Component {
     render() {
 
-        const { experiences } = this.props;
-
+        const { experiences, deleteMethod } = this.props;
         return (
-            <div id="prof-Exp"> Professional Experience:
+            <div id="experience"> 
+                <h2>Professional Experience:</h2>
+                <div  id="prof-Exp">
                 {
                     experiences.map((item) => {
                         return (
                             <ul key={item.id}>
-                                <li>{item.title.text}</li>
-                                <li>{item.company.text}</li>
-                                <li>{item.years.text}</li>
+                                <button type="button" 
+                                data-id={item.id} 
+                                onClick={deleteMethod}
+                                />
+                                <li>
+                                    <span className="align-end">Job Title: </span> 
+                                    <span>{item.title.text}</span>
+                                </li>
+                                <li>
+                                    <span className="align-end">Company Name: </span>
+                                    <span>{item.company.text}</span>
+                                </li>
+                                <li>
+                                    <span className="align-end">Years worked at this role: </span>
+                                    <span>{item.years.text}</span>
+                                </li>
                             </ul>
                         )
                     })
                 }
+                </div>
             </div>
         )
     }

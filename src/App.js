@@ -57,6 +57,8 @@ export default class App extends React.Component {
     this.handleGraduationInput = this.handleGraduationInput.bind(this)
     this.handleAddExp = this.handleAddExp.bind(this)
     this.handleAddEdu = this.handleAddEdu.bind(this)
+    this.deleteExp = this.deleteExp.bind(this)
+    this.deleteEdu = this.deleteEdu.bind(this)
 
   }
 
@@ -460,6 +462,19 @@ export default class App extends React.Component {
     })
   }
 
+  deleteExp = (e) => {
+    this.setState({
+      experiences: this.state.experiences.filter(item => item.id !== e.target.getAttribute("data-id"))
+    })
+  }
+
+  deleteEdu = (e) => {
+    this.setState({
+      educations: this.state.educations.filter(item => item.id !== e.target.getAttribute("data-id"))
+    })
+  }
+
+
   render() {
 
     const { general, experience, education} = this.state.input;
@@ -546,8 +561,8 @@ export default class App extends React.Component {
         </div>
         <div id="display-section">
             <General genInfo={general} />
-            <Experience experiences={this.state.experiences} />
-            <Education educations={this.state.educations} />
+            <Experience experiences={this.state.experiences} deleteMethod={this.deleteExp} />
+            <Education educations={this.state.educations} deleteMethod={this.deleteEdu}/>
         </div>
       </div>
     )
