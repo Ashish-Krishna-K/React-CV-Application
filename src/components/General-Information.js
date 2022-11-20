@@ -1,19 +1,16 @@
-import React from "react";
-
 import '../styles/General-Information.css'
 
-export class General extends React.Component {
-    render() {
+const General = (props) => {
 
-        const { name, email, phone } = this.props.genInfo;
-        return (
-            <div id="general">
-                <h2>{name}</h2>
-                <div id="space-this">
-                    <span>{email}</span>
-                    <span>{phone}</span>
-                </div>
+    return (
+        <div id="general">
+            <h2>{props.name}</h2>
+            <div id="space-this">
+                <span>{props.email}</span>
+                <span>{props.phone}</span>
             </div>
-        )
-    }
+        </div>
+    )
 }
+
+export default General;
