@@ -101,14 +101,13 @@ function JobDescriptionInput({
   return (
     <>
       <label htmlFor="jobDescription">Description</label>
-      <textarea 
-        name="jobDescription" 
+      <textarea
+        name="jobDescription"
         id="jobDescription"
         placeholder="Enter Description"
         value={jobDescription}
         onChange={handleJobDescriptionChange}
-      >
-      </textarea>
+      ></textarea>
     </>
   );
 }
@@ -126,10 +125,11 @@ function ExperienceForm({
   jobLocation,
   handleJobLocationChange,
   jobDescription,
-  handleJobDescriptionChange
+  handleJobDescriptionChange,
+  clearExpFrmState,
 }: Pick<
   EditingProps,
-  "handleExperienceItemAddition"
+  | "handleExperienceItemAddition"
   | "companyName"
   | "handleCompanyNameChange"
   | "jobTitle"
@@ -142,32 +142,55 @@ function ExperienceForm({
   | "handleJobLocationChange"
   | "jobDescription"
   | "handleJobDescriptionChange"
+  | "clearExpFrmState"
 >) {
   const handleFormSubmission = (ev: SyntheticEvent) => {
     ev.preventDefault();
     const frmData = new FormData(ev.target as HTMLFormElement);
     const newExpItem: ExperienceItem = {
-      companyName: frmData.get("companyName")?.toString() || '',
-      jobTitle: frmData.get("jobTitle")?.toString() || '',
-      startDate: frmData.get("jobStartDate")?.toString() || '',
-      endDate: frmData.get("jobEndDate")?.toString() || '',
-      location: frmData.get("jobLocation")?.toString() || '',
-      description: frmData.get("jobDescription")?.toString() || ''
-    }
+      uid: crypto.randomUUID(),
+      companyName: frmData.get("companyName")?.toString() || "",
+      jobTitle: frmData.get("jobTitle")?.toString() || "",
+      startDate: frmData.get("jobStartDate")?.toString() || "",
+      endDate: frmData.get("jobEndDate")?.toString() || "",
+      location: frmData.get("jobLocation")?.toString() || "",
+      description: frmData.get("jobDescription")?.toString() || "",
+    };
     handleExperienceItemAddition(newExpItem);
-  }
+    clearExpFrmState();
+  };
   return (
     <form action="#" onSubmit={handleFormSubmission}>
-      <CompanyNameInput companyName={companyName} handleCompanyNameChange={handleCompanyNameChange} />
-      <JobTitleInput jobTitle={jobTitle} handleJobTitleChange={handleJobTitleChange} />
-      <JobStartDateInput jobStartDate={jobStartDate} handleJobStartDateChange={handleJobStartDateChange} />
-      <JobEndDateInput jobEndDate={jobEndDate} handleJobEndDateChange={handleJobEndDateChange}/>
-      <JobLocationInput jobLocation={jobLocation} handleJobLocationChange={handleJobLocationChange}/>
-      <JobDescriptionInput jobDescription={jobDescription} handleJobDescriptionChange={handleJobDescriptionChange}/>
-      <button type="reset">Clear</button>
+      <CompanyNameInput
+        companyName={companyName}
+        handleCompanyNameChange={handleCompanyNameChange}
+      />
+      <JobTitleInput
+        jobTitle={jobTitle}
+        handleJobTitleChange={handleJobTitleChange}
+      />
+      <JobStartDateInput
+        jobStartDate={jobStartDate}
+        handleJobStartDateChange={handleJobStartDateChange}
+      />
+      <JobEndDateInput
+        jobEndDate={jobEndDate}
+        handleJobEndDateChange={handleJobEndDateChange}
+      />
+      <JobLocationInput
+        jobLocation={jobLocation}
+        handleJobLocationChange={handleJobLocationChange}
+      />
+      <JobDescriptionInput
+        jobDescription={jobDescription}
+        handleJobDescriptionChange={handleJobDescriptionChange}
+      />
+      <button type="reset" onClick={clearExpFrmState}>
+        Clear
+      </button>
       <button type="submit">Submit</button>
     </form>
-  )
+  );
 }
 
 export default function ExperienceInformationForm({
@@ -183,10 +206,11 @@ export default function ExperienceInformationForm({
   jobLocation,
   handleJobLocationChange,
   jobDescription,
-  handleJobDescriptionChange
+  handleJobDescriptionChange,
+  clearExpFrmState,
 }: Pick<
   EditingProps,
-  "handleExperienceItemAddition"
+  | "handleExperienceItemAddition"
   | "companyName"
   | "handleCompanyNameChange"
   | "jobTitle"
@@ -199,11 +223,12 @@ export default function ExperienceInformationForm({
   | "handleJobLocationChange"
   | "jobDescription"
   | "handleJobDescriptionChange"
+  | "clearExpFrmState"
 >) {
   return (
     <section className="experience-detail">
       <h2>Experience Details</h2>
-      <ExperienceForm 
+      <ExperienceForm
         handleExperienceItemAddition={handleExperienceItemAddition}
         companyName={companyName}
         handleCompanyNameChange={handleCompanyNameChange}
@@ -217,6 +242,7 @@ export default function ExperienceInformationForm({
         handleJobLocationChange={handleJobLocationChange}
         jobDescription={jobDescription}
         handleJobDescriptionChange={handleJobDescriptionChange}
+        clearExpFrmState={clearExpFrmState}
       />
     </section>
   );

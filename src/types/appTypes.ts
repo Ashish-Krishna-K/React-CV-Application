@@ -1,6 +1,7 @@
 import { ChangeEvent } from "react";
 
 export interface EducationItem {
+  uid: string;
   schoolName: string;
   degreeName: string;
   startDate: string;
@@ -9,6 +10,7 @@ export interface EducationItem {
 }
 
 export interface ExperienceItem {
+  uid: string;
   companyName: string;
   jobTitle: string;
   startDate: string;
@@ -38,6 +40,7 @@ export interface EditingProps {
   handleEduEndDateChange: (event: ChangeEvent<HTMLInputElement>) => void;
   eduLocation: string;
   handleLocationChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  clearEduFrmState: () => void;
   experienceItems: ExperienceItem[];
   handleExperienceItemAddition: (item: ExperienceItem) => void;
   companyName: string;
@@ -52,6 +55,7 @@ export interface EditingProps {
   handleJobLocationChange: (event: ChangeEvent<HTMLInputElement>) => void;
   jobDescription: string;
   handleJobDescriptionChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+  clearExpFrmState: () => void;
 }
 
 export type PreviewProps = Pick<

@@ -106,6 +106,7 @@ function EducationForm({
   handleEduEndDateChange,
   eduLocation,
   handleLocationChange,
+  clearEduFrmState,
 }: Pick<
   EditingProps,
   | "handleEducationItemAddition"
@@ -119,30 +120,50 @@ function EducationForm({
   | "handleEduEndDateChange"
   | "eduLocation"
   | "handleLocationChange"
+  | "clearEduFrmState"
 >) {
   const handleFormSubmission = (ev: SyntheticEvent) => {
     ev.preventDefault();
     const frmData = new FormData(ev.target as HTMLFormElement);
     const newEduItem: EducationItem = {
-      schoolName: frmData.get("schoolName")?.toString() || '',
-      degreeName: frmData.get("degreeName")?.toString() || '',
-      startDate: frmData.get("eduStartDate")?.toString() || '',
-      endDate: frmData.get("eduEndDate")?.toString() || '',
-      location: frmData.get("eduLocation")?.toString() || ''
-    }
+      uid: crypto.randomUUID(),
+      schoolName: frmData.get("schoolName")?.toString() || "",
+      degreeName: frmData.get("degreeName")?.toString() || "",
+      startDate: frmData.get("eduStartDate")?.toString() || "",
+      endDate: frmData.get("eduEndDate")?.toString() || "",
+      location: frmData.get("eduLocation")?.toString() || "",
+    };
     handleEducationItemAddition(newEduItem);
-  }
+    clearEduFrmState();
+  };
   return (
     <form action="#" onSubmit={handleFormSubmission}>
-      <SchoolNameInput schoolName={schoolName} handleSchoolNameChange={handleSchoolNameChange} />
-      <DegreeNameInput degreeName={degreeName} handleDegreeNameChange={handleDegreeNameChange} />
-      <EducationStartDateInput eduStartDate={eduStartDate} handleEduStartDateChange={handleEduStartDateChange} />
-      <EducationEndDateInput eduEndDate={eduEndDate} handleEduEndDateChange={handleEduEndDateChange}/>
-      <EducationLocationInput eduLocation={eduLocation} handleLocationChange={handleLocationChange}/>
-      <button type="reset">Clear</button>
+      <SchoolNameInput
+        schoolName={schoolName}
+        handleSchoolNameChange={handleSchoolNameChange}
+      />
+      <DegreeNameInput
+        degreeName={degreeName}
+        handleDegreeNameChange={handleDegreeNameChange}
+      />
+      <EducationStartDateInput
+        eduStartDate={eduStartDate}
+        handleEduStartDateChange={handleEduStartDateChange}
+      />
+      <EducationEndDateInput
+        eduEndDate={eduEndDate}
+        handleEduEndDateChange={handleEduEndDateChange}
+      />
+      <EducationLocationInput
+        eduLocation={eduLocation}
+        handleLocationChange={handleLocationChange}
+      />
+      <button type="reset" onClick={clearEduFrmState}>
+        Clear
+      </button>
       <button type="submit">Submit</button>
     </form>
-  )
+  );
 }
 
 export default function EducationInformationForm({
@@ -157,6 +178,7 @@ export default function EducationInformationForm({
   handleEduEndDateChange,
   eduLocation,
   handleLocationChange,
+  clearEduFrmState,
 }: Pick<
   EditingProps,
   | "handleEducationItemAddition"
@@ -170,11 +192,12 @@ export default function EducationInformationForm({
   | "handleEduEndDateChange"
   | "eduLocation"
   | "handleLocationChange"
+  | "clearEduFrmState"
 >) {
   return (
     <section className="education-detail">
       <h2>Education Details</h2>
-      <EducationForm 
+      <EducationForm
         handleEducationItemAddition={handleEducationItemAddition}
         schoolName={schoolName}
         handleSchoolNameChange={handleSchoolNameChange}
@@ -186,6 +209,7 @@ export default function EducationInformationForm({
         handleEduEndDateChange={handleEduEndDateChange}
         eduLocation={eduLocation}
         handleLocationChange={handleLocationChange}
+        clearEduFrmState={clearEduFrmState}
       />
     </section>
   );

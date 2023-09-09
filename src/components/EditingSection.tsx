@@ -23,7 +23,7 @@ export default function EditingSection({
   handleEduEndDateChange,
   eduLocation,
   handleLocationChange,
-  experienceItems,
+  clearEduFrmState,
   handleExperienceItemAddition,
   companyName,
   handleCompanyNameChange,
@@ -37,6 +37,7 @@ export default function EditingSection({
   handleJobLocationChange,
   jobDescription,
   handleJobDescriptionChange,
+  clearExpFrmState,
 }: EditingProps) {
   return (
     <>
@@ -50,7 +51,7 @@ export default function EditingSection({
         address={address}
         handleAddressChange={handleAddressChange}
       />
-      <EducationInformationForm 
+      <EducationInformationForm
         handleEducationItemAddition={handleEducationItemAddition}
         schoolName={schoolName}
         handleSchoolNameChange={handleSchoolNameChange}
@@ -62,8 +63,9 @@ export default function EditingSection({
         handleEduEndDateChange={handleEduEndDateChange}
         eduLocation={eduLocation}
         handleLocationChange={handleLocationChange}
+        clearEduFrmState={clearEduFrmState}
       />
-      <ExperienceInformationForm 
+      <ExperienceInformationForm
         handleExperienceItemAddition={handleExperienceItemAddition}
         companyName={companyName}
         handleCompanyNameChange={handleCompanyNameChange}
@@ -77,6 +79,7 @@ export default function EditingSection({
         handleJobLocationChange={handleJobLocationChange}
         jobDescription={jobDescription}
         handleJobDescriptionChange={handleJobDescriptionChange}
+        clearExpFrmState={clearExpFrmState}
       />
     </>
   );

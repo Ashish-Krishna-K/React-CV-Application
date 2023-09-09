@@ -22,7 +22,7 @@ function App() {
   const [jobEndDate, setJobEndDate] = useState<string>("");
   const [jobLocation, setJobLocation] = useState<string>("");
   const [jobDescription, setJobDescription] = useState<string>("");
-  
+
   return (
     <>
       <EditingSection
@@ -66,6 +66,13 @@ function App() {
         handleLocationChange={(event: ChangeEvent<HTMLInputElement>) =>
           setEduLocation(event.target.value)
         }
+        clearEduFrmState={() => {
+          setSchoolName("");
+          setDegreeName("");
+          setEduStartDate("");
+          setEduEndDate("");
+          setEduLocation("");
+        }}
         experienceItems={experienceItems}
         handleExperienceItemAddition={(item: ExperienceItem) =>
           setExperienceItems([...experienceItems, item])
@@ -94,6 +101,14 @@ function App() {
         handleJobDescriptionChange={(event: ChangeEvent<HTMLTextAreaElement>) =>
           setJobDescription(event.target.value)
         }
+        clearExpFrmState={() => {
+          setCompanyName("");
+          setJobTitle("");
+          setJobStartDate("");
+          setJobEndDate("");
+          setJobLocation("");
+          setJobDescription("");
+        }}
       />
       <PreviewSection
         fullName={fullName}
