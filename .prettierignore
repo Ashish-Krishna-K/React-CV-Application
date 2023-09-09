@@ -1,0 +1,5 @@
+src/assets
+
+# Ignore artifacts:
+build
+coverage
