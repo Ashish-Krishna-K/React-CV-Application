@@ -17,7 +17,10 @@ export default function GeneralInformationForm({
             type="text"
             value={generalInfo.fullName}
             onChange={(ev: ChangeEvent<HTMLInputElement>) =>
-              handleGeneralInfoChange({ ...generalInfo, fullName: ev.target.value })
+              handleGeneralInfoChange({
+                ...generalInfo,
+                fullName: ev.target.value,
+              })
             }
             placeholder="First and Last name"
           />
@@ -30,7 +33,10 @@ export default function GeneralInformationForm({
             type="email"
             value={generalInfo.email}
             onChange={(ev: ChangeEvent<HTMLInputElement>) =>
-              handleGeneralInfoChange({ ...generalInfo, email: ev.target.value })
+              handleGeneralInfoChange({
+                ...generalInfo,
+                email: ev.target.value,
+              })
             }
             placeholder="Enter email"
           />
@@ -43,7 +49,10 @@ export default function GeneralInformationForm({
             type="tel"
             value={generalInfo.phoneNumber}
             onChange={(ev: ChangeEvent<HTMLInputElement>) =>
-              handleGeneralInfoChange({ ...generalInfo, phoneNumber: ev.target.value })
+              handleGeneralInfoChange({
+                ...generalInfo,
+                phoneNumber: ev.target.value,
+              })
             }
             placeholder="Enter Phone number"
           />
@@ -56,7 +65,10 @@ export default function GeneralInformationForm({
             type="text"
             value={generalInfo.address}
             onChange={(ev: ChangeEvent<HTMLInputElement>) =>
-              handleGeneralInfoChange({ ...generalInfo, address: ev.target.value })
+              handleGeneralInfoChange({
+                ...generalInfo,
+                address: ev.target.value,
+              })
             }
             placeholder="City, Country"
           />

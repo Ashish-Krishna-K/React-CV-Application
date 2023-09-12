@@ -2,23 +2,7 @@ import { PreviewProps } from '../types/appTypes';
 
 export default function ExperienceInformationPreview({
   experienceItems,
-  companyName,
-  jobTitle,
-  jobStartDate,
-  jobEndDate,
-  jobLocation,
-  jobDescription,
-}: Pick<
-  PreviewProps,
-  | 'experienceItems'
-  | 'companyName'
-  | 'jobTitle'
-  | 'jobStartDate'
-  | 'jobEndDate'
-  | 'jobLocation'
-  | 'jobDescription'
->) {
-  const renderDates = jobStartDate !== '' && jobEndDate !== '';
+}: Pick<PreviewProps, 'experienceItems'>) {
   return (
     <>
       <ul>
@@ -34,17 +18,6 @@ export default function ExperienceInformationPreview({
           </li>
         ))}
       </ul>
-      <div>
-        <p>{companyName}</p>
-        <p>{jobTitle}</p>
-        <p>{jobDescription}</p>
-        {renderDates && (
-          <p>
-            {jobStartDate} - {jobEndDate}
-          </p>
-        )}
-        <p>{jobLocation}</p>
-      </div>
     </>
   );
 }

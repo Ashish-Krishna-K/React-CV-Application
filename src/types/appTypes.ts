@@ -34,13 +34,21 @@ export interface EditingProps {
 }
 
 export interface EducationProps {
-  handleEducationItemAddition: (item: EducationItem) => void;
+  item: EducationItem;
+  handleEditCurrentItem: (item: EducationItem) => void;
+  handleNewItemCreation: () => void;
   handleCancelBtnClick: () => void;
-  item?: EducationItem;
 }
 
 export interface ExperienceProps {
-  handleExperienceItemAddition: (item: ExperienceItem) => void;
+  item: ExperienceItem;
+  handleEditCurrentItem: (item: ExperienceItem) => void;
+  handleNewItemCreation: () => void;
   handleCancelBtnClick: () => void;
-  item?: ExperienceItem;
+}
+
+export interface PreviewProps {
+  generalInfo: GeneralInfoItem;
+  educationItems: EducationItem[];
+  experienceItems: ExperienceItem[];
 }

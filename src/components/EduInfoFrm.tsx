@@ -3,32 +3,15 @@ import { EditingProps, EducationItem, EducationProps } from '../types/appTypes';
 
 function EducationForm({
   item,
-  handleEducationItemAddition,
+  handleEditCurrentItem,
+  handleNewItemCreation,
   handleCancelBtnClick,
 }: EducationProps) {
-  const [eduItem, setEduItem] = useState<EducationItem>({
-    uid: crypto.randomUUID(),
-    schoolName: '',
-    degreeName: '',
-    startDate: '',
-    endDate: '',
-    location: '',
-  });
-
-  if (item !== undefined) setEduItem(item);
-
   const handleFormSubmission = (ev: SyntheticEvent) => {
     ev.preventDefault();
-    handleEducationItemAddition(eduItem);
-    setEduItem({
-      uid: crypto.randomUUID(),
-      schoolName: '',
-      degreeName: '',
-      startDate: '',
-      endDate: '',
-      location: '',
-    });
+    handleNewItemCreation();
   };
+
   return (
     <form action="#" onSubmit={handleFormSubmission}>
       <div>
@@ -37,50 +20,54 @@ function EducationForm({
           type="text"
           id="schoolName"
           name="schoolName"
-          value={eduItem.schoolName}
+          value={item.schoolName}
           onChange={(ev: ChangeEvent<HTMLInputElement>) =>
-            setEduItem({ ...eduItem, schoolName: ev.target.value })
+            handleEditCurrentItem({ ...item, schoolName: ev.target.value })
           }
           placeholder="Enter School/University"
         />
       </div>
+
       <div>
         <label htmlFor="degreeName">Degree</label>
         <input
           type="text"
           id="degreeName"
           name="degreeName"
-          value={eduItem.degreeName}
+          value={item.degreeName}
           onChange={(ev: ChangeEvent<HTMLInputElement>) =>
-            setEduItem({ ...eduItem, degreeName: ev.target.value })
+            handleEditCurrentItem({ ...item, degreeName: ev.target.value })
           }
           placeholder="Enter Degree/Field of Study"
         />
       </div>
+
       <div>
         <label htmlFor="eduStartDate">Start Date</label>
         <input
           type="date"
           id="eduStartDate"
           name="eduStartDate"
-          value={eduItem.startDate}
+          value={item.startDate}
           onChange={(ev: ChangeEvent<HTMLInputElement>) =>
-            setEduItem({ ...eduItem, startDate: ev.target.value })
+            handleEditCurrentItem({ ...item, startDate: ev.target.value })
           }
         />
       </div>
+
       <div>
         <label htmlFor="eduEndDate">End Date</label>
         <input
           type="date"
           id="eduEndDate"
           name="eduEndDate"
-          value={eduItem.endDate}
+          value={item.endDate}
           onChange={(ev: ChangeEvent<HTMLInputElement>) =>
-            setEduItem({ ...eduItem, endDate: ev.target.value })
+            handleEditCurrentItem({ ...item, endDate: ev.target.value })
           }
         />
       </div>
+
       <div>
         <label htmlFor="eduLocation">Location</label>
         <input
@@ -88,12 +75,13 @@ function EducationForm({
           id="eduLocation"
           name="eduLocation"
           placeholder="City, Country"
-          value={eduItem.location}
+          value={item.location}
           onChange={(ev: ChangeEvent<HTMLInputElement>) =>
-            setEduItem({ ...eduItem, location: ev.target.value })
+            handleEditCurrentItem({ ...item, location: ev.target.value })
           }
         />
       </div>
+
       <button type="submit">Submit</button>
       <button onClick={handleCancelBtnClick}>Cancel</button>
     </form>
@@ -105,18 +93,36 @@ export default function EducationInformationForm({
   handleEducationItemAddition,
 }: Pick<EditingProps, 'educationItems' | 'handleEducationItemAddition'>) {
   const [showDropDown, setShowDropDown] = useState(false);
-  const [showFrm, setShowFrm] = useState({
-    form: false,
-    button: true,
+  const [showFrm, setShowFrm] = useState(false);
+  const [eduItem, setEduItem] = useState<EducationItem>({
+    uid: crypto.randomUUID(),
+    schoolName: '',
+    degreeName: '',
+    startDate: '',
+    endDate: '',
+    location: '',
   });
-  const handleShowDropDownClick = () => {
-    setShowDropDown(!showDropDown);
+
+  const handleShowDropDownClick = () => setShowDropDown(!showDropDown);
+  const handleShowFrmClick = () => setShowFrm(!showFrm);
+  const handleEditCurrentItem = (currentItem: EducationItem) => {
+    setEduItem(currentItem);
   };
-  const handleShowFrmClick = () => {
-    setShowFrm({
-      form: !showFrm.form,
-      button: !showFrm.button,
+  const handleNewItemCreation = () => {
+    handleEducationItemAddition(eduItem);
+    setEduItem({
+      uid: crypto.randomUUID(),
+      schoolName: '',
+      degreeName: '',
+      startDate: '',
+      endDate: '',
+      location: '',
     });
+    handleShowFrmClick();
+  };
+  const handleEditItemClick = (item: EducationItem) => {
+    setEduItem(item);
+    handleShowFrmClick();
   };
   return (
     <section className="education-detail">
@@ -125,15 +131,19 @@ export default function EducationInformationForm({
         <div>
           <ul className="education-items">
             {educationItems.map((item) => (
-              <li key={item.uid}>{item.schoolName}</li>
+              <li key={item.uid} onClick={() => handleEditItemClick(item)}>
+                {item.schoolName}
+              </li>
             ))}
           </ul>
-          {showFrm.button && (
+          {!showFrm && (
             <button onClick={handleShowFrmClick}>Add Education</button>
           )}
-          {showFrm.form && (
+          {showFrm && (
             <EducationForm
-              handleEducationItemAddition={handleEducationItemAddition}
+              item={eduItem}
+              handleEditCurrentItem={handleEditCurrentItem}
+              handleNewItemCreation={handleNewItemCreation}
               handleCancelBtnClick={handleShowFrmClick}
             />
           )}

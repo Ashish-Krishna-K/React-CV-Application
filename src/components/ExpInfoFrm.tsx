@@ -6,31 +6,14 @@ import {
 } from '../types/appTypes';
 
 function ExperienceForm({
-  handleExperienceItemAddition,
-  handleCancelBtnClick,
   item,
+  handleEditCurrentItem,
+  handleNewItemCreation,
+  handleCancelBtnClick,
 }: ExperienceProps) {
-  const [expItem, setExpItem] = useState<ExperienceItem>({
-    uid: crypto.randomUUID(),
-    companyName: '',
-    jobTitle: '',
-    startDate: '',
-    endDate: '',
-    location: '',
-    description: '',
-  });
   const handleFormSubmission = (ev: SyntheticEvent) => {
     ev.preventDefault();
-    handleExperienceItemAddition(expItem);
-    setExpItem({
-      uid: crypto.randomUUID(),
-      companyName: '',
-      jobTitle: '',
-      startDate: '',
-      endDate: '',
-      location: '',
-      description: '',
-    });
+    handleNewItemCreation();
   };
   return (
     <form action="#" onSubmit={handleFormSubmission}>
@@ -40,9 +23,9 @@ function ExperienceForm({
           type="text"
           id="companyName"
           name="companyName"
-          value={expItem.companyName}
+          value={item.companyName}
           onChange={(ev: ChangeEvent<HTMLInputElement>) =>
-            setExpItem({ ...expItem, companyName: ev.target.value })
+            handleEditCurrentItem({ ...item, companyName: ev.target.value })
           }
           placeholder="Enter Company Name"
         />
@@ -54,9 +37,9 @@ function ExperienceForm({
           type="text"
           id="jobTitle"
           name="jobTitle"
-          value={expItem.jobTitle}
+          value={item.jobTitle}
           onChange={(ev: ChangeEvent<HTMLInputElement>) =>
-            setExpItem({ ...expItem, jobTitle: ev.target.value })
+            handleEditCurrentItem({ ...item, jobTitle: ev.target.value })
           }
           placeholder="Enter Position Title"
         />
@@ -68,9 +51,9 @@ function ExperienceForm({
           type="date"
           id="jobStartDate"
           name="jobStartDate"
-          value={expItem.startDate}
+          value={item.startDate}
           onChange={(ev: ChangeEvent<HTMLInputElement>) =>
-            setExpItem({ ...expItem, startDate: ev.target.value })
+            handleEditCurrentItem({ ...item, startDate: ev.target.value })
           }
         />
       </div>
@@ -81,9 +64,9 @@ function ExperienceForm({
           type="date"
           id="jobEndDate"
           name="jobEndDate"
-          value={expItem.endDate}
+          value={item.endDate}
           onChange={(ev: ChangeEvent<HTMLInputElement>) =>
-            setExpItem({ ...expItem, endDate: ev.target.value })
+            handleEditCurrentItem({ ...item, endDate: ev.target.value })
           }
         />
       </div>
@@ -95,9 +78,9 @@ function ExperienceForm({
           id="jobLocation"
           name="jobLocation"
           placeholder="City, Country"
-          value={expItem.location}
+          value={item.location}
           onChange={(ev: ChangeEvent<HTMLInputElement>) =>
-            setExpItem({ ...expItem, location: ev.target.value })
+            handleEditCurrentItem({ ...item, location: ev.target.value })
           }
         />
       </div>
@@ -108,9 +91,9 @@ function ExperienceForm({
           name="jobDescription"
           id="jobDescription"
           placeholder="Enter Description"
-          value={expItem.description}
+          value={item.description}
           onChange={(ev: ChangeEvent<HTMLTextAreaElement>) =>
-            setExpItem({ ...expItem, description: ev.target.value })
+            handleEditCurrentItem({ ...item, description: ev.target.value })
           }
         ></textarea>
       </div>
@@ -126,19 +109,40 @@ export default function ExperienceInformationForm({
   handleExperienceItemAddition,
 }: Pick<EditingProps, 'experienceItems' | 'handleExperienceItemAddition'>) {
   const [showDropDown, setShowDropDown] = useState(false);
-  const [showFrm, setShowFrm] = useState({
-    form: false,
-    button: true,
+  const [showFrm, setShowFrm] = useState(false);
+  const [expItem, setExpItem] = useState<ExperienceItem>({
+    uid: crypto.randomUUID(),
+    companyName: '',
+    jobTitle: '',
+    startDate: '',
+    endDate: '',
+    location: '',
+    description: '',
   });
-  const handleShowDropDownClick = () => {
-    setShowDropDown(!showDropDown);
+
+  const handleShowDropDownClick = () => setShowDropDown(!showDropDown);
+  const handleShowFrmClick = () => setShowFrm(!showFrm);
+  const handleEditCurrentItem = (currentItem: ExperienceItem) => {
+    setExpItem(currentItem);
   };
-  const handleShowFrmClick = () => {
-    setShowFrm({
-      form: !showFrm.form,
-      button: !showFrm.button,
+  const handleNewItemCreation = () => {
+    handleExperienceItemAddition(expItem);
+    setExpItem({
+      uid: crypto.randomUUID(),
+      companyName: '',
+      jobTitle: '',
+      startDate: '',
+      endDate: '',
+      location: '',
+      description: '',
     });
+    handleShowFrmClick();
   };
+  const handleEditItemClick = (item: ExperienceItem) => {
+    setExpItem(item);
+    handleShowFrmClick();
+  };
+
   return (
     <section className="experience-detail">
       <h2 onClick={handleShowDropDownClick}>Experience Details</h2>
@@ -146,19 +150,23 @@ export default function ExperienceInformationForm({
         <div>
           <ul className="experience-items">
             {experienceItems.map((item) => (
-              <li key={item.uid}>{item.companyName}</li>
+              <li key={item.uid} onClick={() => handleEditItemClick(item)}>
+                {item.companyName}
+              </li>
             ))}
           </ul>
-          {showFrm.button && (
+          {!showFrm && (
             <button onClick={handleShowFrmClick}>Add Experience</button>
           )}
+          {showFrm && (
+            <ExperienceForm
+              item={expItem}
+              handleEditCurrentItem={handleEditCurrentItem}
+              handleNewItemCreation={handleNewItemCreation}
+              handleCancelBtnClick={handleShowFrmClick}
+            />
+          )}
         </div>
-      )}
-      {showFrm.form && (
-        <ExperienceForm
-          handleExperienceItemAddition={handleExperienceItemAddition}
-          handleCancelBtnClick={handleShowFrmClick}
-        />
       )}
     </section>
   );

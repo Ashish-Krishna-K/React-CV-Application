@@ -1,11 +1,9 @@
 import { PreviewProps } from '../types/appTypes';
 
 export default function GeneralInformationPreview({
-  fullName,
-  email,
-  phoneNumber,
-  address,
-}: Pick<PreviewProps, 'fullName' | 'email' | 'phoneNumber' | 'address'>) {
+  generalInfo,
+}: Pick<PreviewProps, 'generalInfo'>) {
+  const { fullName, email, phoneNumber, address } = generalInfo;
   return (
     <div>
       <div>{fullName}</div>

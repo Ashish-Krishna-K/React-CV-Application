@@ -4,49 +4,15 @@ import ExperienceInformationPreview from './components/ExpInfoPreview';
 import GeneralInformationPreview from './components/GenInfoPreview';
 
 export default function PreviewSection({
-  fullName,
-  email,
-  phoneNumber,
-  address,
+  generalInfo,
   educationItems,
-  schoolName,
-  degreeName,
-  eduStartDate,
-  eduEndDate,
-  eduLocation,
   experienceItems,
-  companyName,
-  jobTitle,
-  jobStartDate,
-  jobEndDate,
-  jobLocation,
-  jobDescription,
 }: PreviewProps) {
   return (
     <section className="preview-section">
-      <GeneralInformationPreview
-        fullName={fullName}
-        email={email}
-        phoneNumber={phoneNumber}
-        address={address}
-      />
-      <EducationInformationPreview
-        educationItems={educationItems}
-        schoolName={schoolName}
-        degreeName={degreeName}
-        eduStartDate={eduStartDate}
-        eduEndDate={eduEndDate}
-        eduLocation={eduLocation}
-      />
-      <ExperienceInformationPreview
-        experienceItems={experienceItems}
-        companyName={companyName}
-        jobTitle={jobTitle}
-        jobStartDate={jobStartDate}
-        jobEndDate={jobEndDate}
-        jobLocation={jobLocation}
-        jobDescription={jobDescription}
-      />
+      <GeneralInformationPreview generalInfo={generalInfo} />
+      <EducationInformationPreview educationItems={educationItems} />
+      <ExperienceInformationPreview experienceItems={experienceItems} />
     </section>
   );
 }

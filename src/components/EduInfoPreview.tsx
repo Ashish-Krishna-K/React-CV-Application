@@ -2,21 +2,7 @@ import { PreviewProps } from '../types/appTypes';
 
 export default function EducationInformationPreview({
   educationItems,
-  schoolName,
-  degreeName,
-  eduStartDate,
-  eduEndDate,
-  eduLocation,
-}: Pick<
-  PreviewProps,
-  | 'educationItems'
-  | 'schoolName'
-  | 'degreeName'
-  | 'eduStartDate'
-  | 'eduEndDate'
-  | 'eduLocation'
->) {
-  const renderDates = eduStartDate !== '' && eduEndDate !== '';
+}: Pick<PreviewProps, 'educationItems'>) {
   return (
     <>
       <ul>
@@ -31,16 +17,6 @@ export default function EducationInformationPreview({
           </li>
         ))}
       </ul>
-      <div>
-        <p>{schoolName}</p>
-        <p>{degreeName}</p>
-        {renderDates && (
-          <p>
-            {eduStartDate} - {eduEndDate}
-          </p>
-        )}
-        <p>{eduLocation}</p>
-      </div>
     </>
   );
 }
