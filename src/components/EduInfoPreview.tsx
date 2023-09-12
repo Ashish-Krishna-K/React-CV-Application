@@ -1,4 +1,4 @@
-import { PreviewProps } from "../types/appTypes";
+import { PreviewProps } from '../types/appTypes';
 
 export default function EducationInformationPreview({
   educationItems,
@@ -9,14 +9,14 @@ export default function EducationInformationPreview({
   eduLocation,
 }: Pick<
   PreviewProps,
-  | "educationItems"
-  | "schoolName"
-  | "degreeName"
-  | "eduStartDate"
-  | "eduEndDate"
-  | "eduLocation"
+  | 'educationItems'
+  | 'schoolName'
+  | 'degreeName'
+  | 'eduStartDate'
+  | 'eduEndDate'
+  | 'eduLocation'
 >) {
-  const renderDates = eduStartDate !== "" && eduEndDate !== "";
+  const renderDates = eduStartDate !== '' && eduEndDate !== '';
   return (
     <>
       <ul>

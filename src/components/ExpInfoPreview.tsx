@@ -1,4 +1,4 @@
-import { PreviewProps } from "../types/appTypes";
+import { PreviewProps } from '../types/appTypes';
 
 export default function ExperienceInformationPreview({
   experienceItems,
@@ -10,15 +10,15 @@ export default function ExperienceInformationPreview({
   jobDescription,
 }: Pick<
   PreviewProps,
-  | "experienceItems"
-  | "companyName"
-  | "jobTitle"
-  | "jobStartDate"
-  | "jobEndDate"
-  | "jobLocation"
-  | "jobDescription"
+  | 'experienceItems'
+  | 'companyName'
+  | 'jobTitle'
+  | 'jobStartDate'
+  | 'jobEndDate'
+  | 'jobLocation'
+  | 'jobDescription'
 >) {
-  const renderDates = jobStartDate !== "" && jobEndDate !== "";
+  const renderDates = jobStartDate !== '' && jobEndDate !== '';
   return (
     <>
       <ul>
