@@ -8,12 +8,15 @@ import '../styles/EduInfoFrm.css';
 import Icon from '@mdi/react';
 import { mdiChevronDown, mdiChevronUp, mdiSchool, mdiDelete } from '@mdi/js';
 
+// form element extracted to it's own component for readability
 function EducationForm({
   item,
   handleEditCurrentItem,
   handleNewItemCreation,
   handleCancelBtnClick,
 }: EducationProps) {
+
+  // a function to handle form submission
   const handleFormSubmission = (ev: SyntheticEvent) => {
     ev.preventDefault();
     handleNewItemCreation();
@@ -56,11 +59,12 @@ function EducationForm({
       </div>
 
       <div>
-        <label htmlFor="eduStartDate">Start Date</label>
+        <label htmlFor="eduStartDate">Start Date <em>*required</em></label>
         <input
           type="date"
           id="eduStartDate"
           name="eduStartDate"
+          required
           value={item.startDate}
           onChange={(ev: ChangeEvent<HTMLInputElement>) =>
             handleEditCurrentItem({ ...item, startDate: ev.target.value })
@@ -69,11 +73,12 @@ function EducationForm({
       </div>
 
       <div>
-        <label htmlFor="eduEndDate">End Date</label>
+        <label htmlFor="eduEndDate">End Date <em>*required</em></label>
         <input
           type="date"
           id="eduEndDate"
           name="eduEndDate"
+          required
           value={item.endDate}
           onChange={(ev: ChangeEvent<HTMLInputElement>) =>
             handleEditCurrentItem({ ...item, endDate: ev.target.value })
@@ -114,8 +119,11 @@ export default function EducationInformationForm({
   | 'handleEducationItemAddition'
   | 'handleEducationItemDeletion'
 >) {
-  const [showDropDown, setShowDropDown] = useState(false);
-  const [showFrm, setShowFrm] = useState(false);
+  // state for showing and hiding dropdown(the view when education details is clicked)
+  const [showDropDown, setShowDropDown] = useState<boolean>(false);
+  // state for showing and hiding form
+  const [showFrm, setShowFrm] = useState<boolean>(false);
+  // state for editing individual fields for education form
   const [eduItem, setEduItem] = useState<EducationItem>({
     uid: crypto.randomUUID(),
     schoolName: '',
@@ -125,11 +133,16 @@ export default function EducationInformationForm({
     location: '',
   });
 
+  // function for toggling drop down
   const handleShowDropDownClick = () => setShowDropDown(!showDropDown);
+  // function for toggling form
   const handleShowFrmClick = () => setShowFrm(!showFrm);
+  // function for changing state when input fields are changed
   const handleEditCurrentItem = (currentItem: EducationItem) => {
     setEduItem(currentItem);
   };
+  // function for creating a newItem, adding it to the list and resetting
+  // state
   const handleNewItemCreation = () => {
     handleEducationItemAddition(eduItem);
     setEduItem({
@@ -142,10 +155,13 @@ export default function EducationInformationForm({
     });
     handleShowFrmClick();
   };
+  // function for item to be displayed in the form if an item
+  // is clicked for editing
   const handleEditItemClick = (item: EducationItem) => {
     setEduItem(item);
     handleShowFrmClick();
   };
+  // function to handle cancel button
   const handleCancelBtnClick = () => {
     setEduItem({
       uid: crypto.randomUUID(),
@@ -164,14 +180,18 @@ export default function EducationInformationForm({
           <Icon path={mdiSchool} size={1.5} />
           <h2>Education Details</h2>
         </div>
+        {/* changing the dropdown icon based on showDropDown state */}
         {showDropDown ? (
           <Icon path={mdiChevronUp} size={2.5} />
         ) : (
           <Icon path={mdiChevronDown} size={2.5} />
         )}
       </div>
+      {/* only show other fields if the user clicks the div */}
       {showDropDown && (
         <>
+        {/* only show the form if the user clicks on an item or on the 
+        add item button */}
           {!showFrm && (
             <>
               <ul className="education-items">
@@ -181,6 +201,7 @@ export default function EducationInformationForm({
                     <button
                       className="delete-edu-item"
                       onClick={(ev: SyntheticEvent) => {
+                        // prevent parent element's event from firing
                         ev.stopPropagation();
                         handleEducationItemDeletion(item);
                       }}

@@ -1,6 +1,7 @@
 import { type PreviewProps } from '../types/appTypes';
 import '../styles/ExpInfoPreview.css';
 
+// a function for formatting inputted date in a user-friendly way
 const formatDate = (rawDate: string): string => {
   const date = new Date(rawDate);
   const month = date.toLocaleString('default', { month: 'long' });
