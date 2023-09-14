@@ -1,27 +1,21 @@
-# React + TypeScript + Vite
+# CV Generator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[Live Demo](https://ashish-krishna-k.github.io/React-CV-Application/)
 
-Currently, two official plugins are available:
+A CV builder web app built using React as part of [The Odin Project's](https://www.theodinproject.com/) React course.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+_This project was originally built during my first run of The Odin Project as shown in the old branch [here]() during my second run, I'm revisiting the old projects and this time I have decided to use Typescript as practice._
 
-## Expanding the ESLint configuration
+## THe UI
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+The user can fill up the forms on the left side of the webpage to create the resume. A live preview of the resume is shown on the right side of the webapp.
+The personal details doesn't have a submit button any updates of those fields is previewed live while the education and experience items should be submitted for it to be populated on the right side.
 
-- Configure the top-level `parserOptions` property like this:
+## The modules
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+The different elements of the webapp has been split into various reusable components. The individual components are saved in the _components_ folder, while the overall section is saved in the outside _src_ folder.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Future Plans
+
+- Customising resume template
+- Adding a download/export option
