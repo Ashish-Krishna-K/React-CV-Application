@@ -1,5 +1,12 @@
 import { ChangeEvent, SyntheticEvent, useState } from 'react';
-import { EditingProps, EducationItem, EducationProps } from '../types/appTypes';
+import {
+  type EditingProps,
+  type EducationItem,
+  type EducationProps,
+} from '../types/appTypes';
+import '../styles/EduInfoFrm.css';
+import Icon from '@mdi/react';
+import { mdiChevronDown, mdiChevronUp, mdiSchool, mdiDelete } from '@mdi/js';
 
 function EducationForm({
   item,
@@ -15,11 +22,14 @@ function EducationForm({
   return (
     <form action="#" onSubmit={handleFormSubmission}>
       <div>
-        <label htmlFor="schoolName">School</label>
+        <label htmlFor="schoolName">
+          School <em>*required</em>
+        </label>
         <input
           type="text"
           id="schoolName"
           name="schoolName"
+          required
           value={item.schoolName}
           onChange={(ev: ChangeEvent<HTMLInputElement>) =>
             handleEditCurrentItem({ ...item, schoolName: ev.target.value })
@@ -29,11 +39,14 @@ function EducationForm({
       </div>
 
       <div>
-        <label htmlFor="degreeName">Degree</label>
+        <label htmlFor="degreeName">
+          Degree <em>*required</em>
+        </label>
         <input
           type="text"
           id="degreeName"
           name="degreeName"
+          required
           value={item.degreeName}
           onChange={(ev: ChangeEvent<HTMLInputElement>) =>
             handleEditCurrentItem({ ...item, degreeName: ev.target.value })
@@ -69,12 +82,15 @@ function EducationForm({
       </div>
 
       <div>
-        <label htmlFor="eduLocation">Location</label>
+        <label htmlFor="eduLocation">
+          Location <em>*required</em>
+        </label>
         <input
           type="text"
           id="eduLocation"
           name="eduLocation"
           placeholder="City, Country"
+          required
           value={item.location}
           onChange={(ev: ChangeEvent<HTMLInputElement>) =>
             handleEditCurrentItem({ ...item, location: ev.target.value })
@@ -91,7 +107,13 @@ function EducationForm({
 export default function EducationInformationForm({
   educationItems,
   handleEducationItemAddition,
-}: Pick<EditingProps, 'educationItems' | 'handleEducationItemAddition'>) {
+  handleEducationItemDeletion,
+}: Pick<
+  EditingProps,
+  | 'educationItems'
+  | 'handleEducationItemAddition'
+  | 'handleEducationItemDeletion'
+>) {
   const [showDropDown, setShowDropDown] = useState(false);
   const [showFrm, setShowFrm] = useState(false);
   const [eduItem, setEduItem] = useState<EducationItem>({
@@ -124,31 +146,65 @@ export default function EducationInformationForm({
     setEduItem(item);
     handleShowFrmClick();
   };
+  const handleCancelBtnClick = () => {
+    setEduItem({
+      uid: crypto.randomUUID(),
+      schoolName: '',
+      degreeName: '',
+      startDate: '',
+      endDate: '',
+      location: '',
+    });
+    handleShowFrmClick();
+  };
   return (
-    <section className="education-detail">
-      <h2 onClick={handleShowDropDownClick}>Education Details</h2>
+    <div className="education-detail">
+      <div className="section-heading" onClick={handleShowDropDownClick}>
+        <div className="left-side">
+          <Icon path={mdiSchool} size={1.5} />
+          <h2>Education Details</h2>
+        </div>
+        {showDropDown ? (
+          <Icon path={mdiChevronUp} size={2.5} />
+        ) : (
+          <Icon path={mdiChevronDown} size={2.5} />
+        )}
+      </div>
       {showDropDown && (
-        <div>
-          <ul className="education-items">
-            {educationItems.map((item) => (
-              <li key={item.uid} onClick={() => handleEditItemClick(item)}>
-                {item.schoolName}
-              </li>
-            ))}
-          </ul>
+        <>
           {!showFrm && (
-            <button onClick={handleShowFrmClick}>Add Education</button>
+            <>
+              <ul className="education-items">
+                {educationItems.map((item) => (
+                  <li key={item.uid} onClick={() => handleEditItemClick(item)}>
+                    <p>{item.schoolName}</p>
+                    <button
+                      className="delete-edu-item"
+                      onClick={(ev: SyntheticEvent) => {
+                        ev.stopPropagation();
+                        handleEducationItemDeletion(item);
+                      }}
+                    >
+                      <Icon path={mdiDelete} size={1} />
+                    </button>
+                  </li>
+                ))}
+              </ul>
+              <button onClick={handleShowFrmClick} className="add-edu-btn">
+                Add Education
+              </button>
+            </>
           )}
           {showFrm && (
             <EducationForm
               item={eduItem}
               handleEditCurrentItem={handleEditCurrentItem}
               handleNewItemCreation={handleNewItemCreation}
-              handleCancelBtnClick={handleShowFrmClick}
+              handleCancelBtnClick={handleCancelBtnClick}
             />
           )}
-        </div>
+        </>
       )}
-    </section>
+    </div>
   );
 }

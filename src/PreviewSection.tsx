@@ -1,7 +1,8 @@
-import { PreviewProps } from './types/appTypes';
+import { type PreviewProps } from './types/appTypes';
 import EducationInformationPreview from './components/EduInfoPreview';
 import ExperienceInformationPreview from './components/ExpInfoPreview';
 import GeneralInformationPreview from './components/GenInfoPreview';
+import './styles/PreviewSection.css';
 
 export default function PreviewSection({
   generalInfo,
@@ -10,9 +11,11 @@ export default function PreviewSection({
 }: PreviewProps) {
   return (
     <section className="preview-section">
-      <GeneralInformationPreview generalInfo={generalInfo} />
-      <EducationInformationPreview educationItems={educationItems} />
-      <ExperienceInformationPreview experienceItems={experienceItems} />
+      <div className="container">
+        <GeneralInformationPreview generalInfo={generalInfo} />
+        <EducationInformationPreview educationItems={educationItems} />
+        <ExperienceInformationPreview experienceItems={experienceItems} />
+      </div>
     </section>
   );
 }

@@ -1,0 +1,13 @@
+.editing-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+  align-items: start;
+  padding: 1vh 2vw;
+  overflow-y: auto;
+  font-family: 'Poppins', sans-serif;
+}
+
+.editing-section > div {
+  width: 90%;
+}

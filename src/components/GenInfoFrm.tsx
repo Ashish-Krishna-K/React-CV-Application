@@ -1,20 +1,29 @@
 import { ChangeEvent } from 'react';
-import { EditingProps } from '../types/appTypes';
+import { type EditingProps } from '../types/appTypes';
+import '../styles/GenInfoFrm.css';
+import Icon from '@mdi/react';
+import { mdiAccount } from '@mdi/js';
 
 export default function GeneralInformationForm({
   generalInfo,
   handleGeneralInfoChange,
 }: Pick<EditingProps, 'generalInfo' | 'handleGeneralInfoChange'>) {
   return (
-    <section className="personal-detail">
-      <h2>Personal Details</h2>
+    <div className="personal-detail">
+      <div className="section-heading">
+        <Icon path={mdiAccount} size={1.5} />
+        <h2>Personal Details</h2>
+      </div>
       <form action="#">
         <div>
-          <label htmlFor="fullName">Full Name</label>
+          <label htmlFor="fullName">
+            Full Name <em>*required</em>
+          </label>
           <input
             id="fullName"
             name="fullName"
             type="text"
+            required
             value={generalInfo.fullName}
             onChange={(ev: ChangeEvent<HTMLInputElement>) =>
               handleGeneralInfoChange({
@@ -26,11 +35,14 @@ export default function GeneralInformationForm({
           />
         </div>
         <div>
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">
+            Email <em>*required</em>
+          </label>
           <input
             id="email"
             name="email"
             type="email"
+            required
             value={generalInfo.email}
             onChange={(ev: ChangeEvent<HTMLInputElement>) =>
               handleGeneralInfoChange({
@@ -42,11 +54,14 @@ export default function GeneralInformationForm({
           />
         </div>
         <div>
-          <label htmlFor="phone">Phone number</label>
+          <label htmlFor="phone">
+            Phone number <em>*required</em>
+          </label>
           <input
             id="phone"
             name="phone"
             type="tel"
+            required
             value={generalInfo.phoneNumber}
             onChange={(ev: ChangeEvent<HTMLInputElement>) =>
               handleGeneralInfoChange({
@@ -58,11 +73,14 @@ export default function GeneralInformationForm({
           />
         </div>
         <div>
-          <label htmlFor="address">Address</label>
+          <label htmlFor="address">
+            Address <em>*required</em>
+          </label>
           <input
             id="address"
             name="address"
             type="text"
+            required
             value={generalInfo.address}
             onChange={(ev: ChangeEvent<HTMLInputElement>) =>
               handleGeneralInfoChange({
@@ -74,6 +92,6 @@ export default function GeneralInformationForm({
           />
         </div>
       </form>
-    </section>
+    </div>
   );
 }

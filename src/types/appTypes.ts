@@ -29,8 +29,10 @@ export interface EditingProps {
   handleGeneralInfoChange: (item: GeneralInfoItem) => void;
   educationItems: EducationItem[];
   handleEducationItemAddition: (item: EducationItem) => void;
+  handleEducationItemDeletion: (item: EducationItem) => void;
   experienceItems: ExperienceItem[];
   handleExperienceItemAddition: (item: ExperienceItem) => void;
+  handleExperienceItemDeletion: (item: ExperienceItem) => void;
 }
 
 export interface EducationProps {

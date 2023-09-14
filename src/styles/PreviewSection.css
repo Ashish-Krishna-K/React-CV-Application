@@ -1,0 +1,18 @@
+.preview-section {
+  overflow: auto;
+  font-family: 'Merriweather', serif;
+}
+
+.preview-section > .container {
+  display: flex;
+  gap: 1vh;
+  flex-direction: column;
+  align-items: center;
+  padding: 3vw;
+  border: 1px solid black;
+  min-height: 65svh;
+  width: 50svw;
+  background-color: white;
+  margin: 0 auto;
+  overflow-y: auto;
+}

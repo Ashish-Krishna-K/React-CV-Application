@@ -1,0 +1,19 @@
+.preview-experience-details {
+  align-self: flex-start;
+  width: 100%;
+}
+
+.preview-experience-details > h2 {
+  border-bottom: 2px solid black;
+}
+
+.experience-item {
+  display: flex;
+  justify-content: space-between;
+  margin: 1vh 0;
+}
+
+.experience-item h3,
+.experience-item p {
+  margin: 0;
+}

@@ -1,0 +1,23 @@
+.personal-detail {
+  border: 1px solid black;
+  padding: 2px 24px;
+  border-radius: 5px;
+  background-color: var(--modal-color);
+}
+
+.personal-detail .section-heading {
+  display: flex;
+  align-items: center;
+  gap: 1vw;
+}
+
+.personal-detail form {
+  padding: 1vw;
+}
+
+.personal-detail form > div {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, 1fr);
+  margin: 1vh;
+}

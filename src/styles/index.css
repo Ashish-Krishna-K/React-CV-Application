@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+  --bg-color: rgb(228, 228, 208);
+  --font-color: rgb(255, 238, 244);
+  --modal-color: rgb(148, 166, 132);
+  --btn-bg-color: rgb(174, 195, 174);
+  --valid-color: rgb(143, 248, 143);
+  --invalid-color: rgb(247, 149, 149);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100svh;
+}
+
+body {
+  background-color: var(--bg-color);
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  font-family: inherit;
+}
+
+input,
+textarea {
+  background-color: var(--bg-color);
+  border: 1px solid var(--modal-color);
+  border-radius: 5px;
+  padding: 4px;
+  outline: none;
+  font-family: inherit;
+}
+
+input:valid,
+textarea:valid {
+  background-color: var(--valid-color);
+}
+
+input:invalid,
+textarea:invalid {
+  background-color: var(--invalid-color);
+}
+
+label em {
+  color: red;
+}
+
+/* Scrollbar styling from W3Schools */
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 100px;
+  background: var(--modal-color);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

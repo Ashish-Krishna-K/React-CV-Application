@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import {
-  GeneralInfoItem,
+  type GeneralInfoItem,
   type EducationItem,
   type ExperienceItem,
 } from './types/appTypes';
@@ -46,23 +46,50 @@ function App() {
       setExperienceItems([...experienceItems, item]);
     }
   };
+  const deleteEduItem = (item: EducationItem) => {
+    setEducationItems(educationItems.filter((items) => items.uid !== item.uid));
+  };
+  const deleteExpItem = (item: ExperienceItem) => {
+    setExperienceItems(
+      experienceItems.filter((items) => items.uid !== item.uid),
+    );
+  };
   return (
     <>
-      <EditingSection
-        generalInfo={generalInfo}
-        handleGeneralInfoChange={(newItem: GeneralInfoItem) =>
-          setGeneralInfo(newItem)
-        }
-        educationItems={educationItems}
-        handleEducationItemAddition={handleEducationItemAddition}
-        experienceItems={experienceItems}
-        handleExperienceItemAddition={handleExperienceItemAddition}
-      />
-      <PreviewSection
-        generalInfo={generalInfo}
-        educationItems={educationItems}
-        experienceItems={experienceItems}
-      />
+      <header>
+        <h1>CV Generator</h1>
+      </header>
+      <main>
+        <EditingSection
+          generalInfo={generalInfo}
+          handleGeneralInfoChange={(newItem: GeneralInfoItem) =>
+            setGeneralInfo(newItem)
+          }
+          educationItems={educationItems}
+          handleEducationItemAddition={handleEducationItemAddition}
+          handleEducationItemDeletion={deleteEduItem}
+          experienceItems={experienceItems}
+          handleExperienceItemAddition={handleExperienceItemAddition}
+          handleExperienceItemDeletion={deleteExpItem}
+        />
+        <PreviewSection
+          generalInfo={generalInfo}
+          educationItems={educationItems}
+          experienceItems={experienceItems}
+        />
+      </main>
+      <footer>
+        <p>
+          Project by{' '}
+          <a href="https://github.com/Ashish-Krishna-K">Ashish-Krishna-K</a>
+        </p>
+        <p>
+          Design Inspiration:{' '}
+          <a href="https://rmathr.github.io/cv-project/">
+            Matheus Rodrigues's Project
+          </a>
+        </p>
+      </footer>
     </>
   );
 }
